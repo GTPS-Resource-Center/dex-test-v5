@@ -13,7 +13,7 @@ Uses 3 different types of protection, to make it 100% indetectable
 Right click option, that copies the selected object path
 
 ### View Script
-Right click option, that shows the decompiled selected local script
+Right click option, that shows the selected local script source
 
 ### Require Module
 Right click option, that shows the `require(module)` response
