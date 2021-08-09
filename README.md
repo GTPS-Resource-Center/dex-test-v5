@@ -9,11 +9,11 @@ Threading loading and optimization making it faster
 ### Indetectable
 Uses 3 different types of protection, to make it 100% indetectable
 
-### Copy Path
-Right click option, that copies the selected object path `(synapse,krnl,protosmasher,...)`
+### Copy Path `(synapse,krnl,protosmasher,...)`
+Right click option, that copies the selected object path
 
-### View Script
-Right click option, that shows the decompiled selected local script `(synapse,krnl,protosmasher,...)`
+### View Script `(synapse,krnl,protosmasher,...)`
+Right click option, that shows the decompiled selected local script
 
 ### Require Module
 Right click option, that shows the `require(module)` response
