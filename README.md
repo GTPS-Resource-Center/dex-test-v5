@@ -7,7 +7,7 @@ not mine, its the dex explorer v4, but now fixed & added many things from the or
 Removed some shit visual stuff and dead/bad codes
 
 ### More Secure
-Make the explorer almost indetectable
+Make the explorer 100% indetectable
 
 ### View Script
 Right click option, that shows the decompiled selected local script
