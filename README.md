@@ -15,8 +15,6 @@ not mine, its the dex explorer v4, but now fixed & added many things from the or
 ### Require Module
 - Right click option, that shows the `require(module)` response
 
-### Removed Properties window close button
-- Most common shit was removing it by acident
-
-### Removed Dragging from all the windows
-- Raging feature of the original one, now removed
+# Aditional changes (raging things)
+*Removed Properties window close button
+*Removed Dragging from all the windows
