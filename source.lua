@@ -20,6 +20,7 @@ local Services = setmetatable({},{
 	end
 })
 local plr = Services.Players.LocalPlayer
+local scrframe
 
 function CreateInstance(cls,props)
 	local inst = Instance.new(cls)
@@ -29,8 +30,8 @@ function CreateInstance(cls,props)
 	return inst
 end
 
-function createDexGui()
-	local DexGui = Services.CoreGui:FindFirstChildOfClass('ScreenGui') or CreateInstance("ScreenGui",{DisplayOrder=0,Enabled=true,ResetOnSpawn=true})
+local function protectedGui()
+    local DexGui = Services.CoreGui:FindFirstChildOfClass('ScreenGui') or CreateInstance("ScreenGui",{DisplayOrder=0,Enabled=true,ResetOnSpawn=true})
 	if syn.protect_gui or protect_gui then (syn.protect_gui or protect_gui)(DexGui) else
 	    if getconnections then
 	        local function cleancons(v)
@@ -43,7 +44,12 @@ function createDexGui()
 	        cleancons(Services.CoreGui.DescendantAdded)
 	        cleancons(game.DescendantAdded)
 	    end
-    end
+	end
+	return DexGui
+end
+
+function createDexGui()
+	local DexGui = protectedGui()
 	
 	local DexGui2 = CreateInstance("Frame",{Style=0,Active=false,AnchorPoint=Vector2.new(0,0),BackgroundColor3=Color3.new(0.39215689897537,0.39215689897537,0.39215689897537),BackgroundTransparency=1,BorderColor3=Color3.new(0.10588236153126,0.16470588743687,0.20784315466881),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(1,-300,0,0),Rotation=0,Selectable=false,Size=UDim2.new(0,300,1,0),SizeConstraint=0,Visible=true,ZIndex=1,Name="ContentFrameR",Parent = DexGui})
 	local DexGui3 = CreateInstance("Frame",{Style=0,Active=false,AnchorPoint=Vector2.new(0,0),BackgroundColor3=Color3.new(0.39215689897537,0.39215689897537,0.39215689897537),BackgroundTransparency=1,BorderColor3=Color3.new(0.10588236153126,0.16470588743687,0.20784315466881),BorderSizePixel=0,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0,-300,0,0),Rotation=0,Selectable=false,Size=UDim2.new(0,300,1,0),SizeConstraint=0,Visible=true,ZIndex=1,Name="ContentFrameL",Parent = DexGui})
@@ -136,6 +142,7 @@ function createDexGui()
 	local DexGui91 = CreateInstance("TextLabel",{Font=4,FontSize=4,Text="Image by KrystalTeam",TextColor3=Color3.new(1,1,1),TextScaled=false,TextSize=12,TextStrokeColor3=Color3.new(0,0,0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=0,TextYAlignment=2,Active=false,AnchorPoint=Vector2.new(0,0),BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,BorderColor3=Color3.new(0.10588236153126,0.16470588743687,0.20784315466881),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0,50,1,-20),Rotation=0,Selectable=false,Size=UDim2.new(1,-55,0,15),SizeConstraint=0,Visible=true,ZIndex=1,Name="Credit",Parent = DexGui88})
 	local DexGui92 = CreateInstance("Frame",{Style=0,Active=false,AnchorPoint=Vector2.new(0,0),BackgroundColor3=Color3.new(0.25098040699959,0.25098040699959,0.25098040699959),BackgroundTransparency=0,BorderColor3=Color3.new(0.43921571969986,0.43921571969986,0.43921571969986),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.60000002384186,5,0,20),Rotation=0,Selectable=false,Size=UDim2.new(0.40000000596046,-10,1,-75),SizeConstraint=0,Visible=true,ZIndex=1,Name="Changelog",Parent = DexGui75})
 	local DexGui93 = CreateInstance("TextLabel",{Font=10,FontSize=5,Text="Changelog",TextColor3=Color3.new(1,1,1),TextScaled=false,TextSize=14,TextStrokeColor3=Color3.new(0,0,0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=2,TextYAlignment=1,Active=false,AnchorPoint=Vector2.new(0,0),BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,BorderColor3=Color3.new(0.10588236153126,0.16470588743687,0.20784315466881),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0,0,0,-20),Rotation=0,Selectable=false,Size=UDim2.new(1,0,0,20),SizeConstraint=0,Visible=true,ZIndex=1,Name="Title",Parent = DexGui92})
+	
 	return DexGui
 end
 
@@ -145,15 +152,6 @@ if not gui.Parent then gui.Parent = Services.CoreGui end
 local contentL = gui:WaitForChild("ContentFrameL")
 local contentR = gui:WaitForChild("ContentFrameR")
 local resources = gui:WaitForChild("Resources")
-
--- Welcome Gui References
-local welcomeFrame = gui:WaitForChild("WelcomeFrame")
-local welcomeOutline = welcomeFrame:WaitForChild("Outline")
-local welcomeContents = welcomeFrame:WaitForChild("Content")
-local welcomeMain = welcomeContents:WaitForChild("Main")
-local welcomeChangelog = welcomeContents:WaitForChild("Changelog")
-local welcomeBottom = welcomeContents:WaitForChild("Bottom")
-local welcomeProgress = welcomeMain:WaitForChild("Progress")
 
 -- Explorer Stuff
 local explorerTree = nil
@@ -1778,7 +1776,9 @@ function f.rightClick(obj)
 	-- Cut
 	
 	if decompile and obj:IsA('LocalScript') then
-	    rightClickContext:Add({Name = "View Script", Icon = "", DisabledIcon = "",Shortcut = "Shift+E", Disabled = false, OnClick = function()
+	    rightClickContext:Add({Name = "Copy Script Source", Icon = "", DisabledIcon = "",Shortcut = "Shift+E", Disabled = false, OnClick = function()
+	        spawn(function()setclipboard(decompile(obj))end)
+	        
 	        rightClickContext:Hide()
 	    end})
 	    
