@@ -15,6 +15,7 @@ Right click option, that shows the decompiled selected local script
 ### Require Module
 Right click option, that shows the `require(module)` response
 
+
 ## Aditional changes (raging things)
 * Removed Properties window close button
 * Removed Dragging from all the windows
