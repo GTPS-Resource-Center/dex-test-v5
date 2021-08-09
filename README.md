@@ -16,5 +16,5 @@ not mine, its the dex explorer v4, but now fixed & added many things from the or
 - Right click option, that shows the `require(module)` response
 
 # Aditional changes (raging things)
-*Removed Properties window close button
-*Removed Dragging from all the windows
+* Removed Properties window close button
+* Removed Dragging from all the windows
