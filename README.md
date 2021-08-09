@@ -18,6 +18,6 @@ Right click option, that shows the selected local script source
 ### Require Module
 Right click option, that shows the `require(module)` response
 
-## Aditional changes (raging things)
+## Aditional changes (only raging things)
 * Removed Properties window close button
 * Removed Dragging from all the windows
