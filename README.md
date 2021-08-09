@@ -4,7 +4,7 @@ not mine, its the dex explorer v4, but now fixed & added many things from the or
 # features
 
 ### Faster Loading
-Removed some shit visual stuff and dead/bad codes
+- Removed some shit visual stuff and dead/bad codes
 
 ### More Secure
 - Make the explorer almost indetectable
