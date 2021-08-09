@@ -4,17 +4,19 @@ not mine, its the dex explorer v4, but now fixed & added many things from the or
 ## Features
 
 ### Faster Loading
-Removed some shit visual stuff and dead/bad codes
+Threading loading and optimization making it faster
 
 ### Indetectable
-Uses 3 different types of protection, to make it indetectable
+Uses 3 different types of protection, to make it 100% indetectable
+
+### Copy Path
+Right click option, that copies the selected object path (synapse,krnl,protosmasher,...)
 
 ### View Script
-Right click option, that shows the decompiled selected local script
+Right click option, that shows the decompiled selected local script (synapse,krnl,protosmasher,...)
 
 ### Require Module
 Right click option, that shows the `require(module)` response
-
 
 ## Aditional changes (raging things)
 * Removed Properties window close button
