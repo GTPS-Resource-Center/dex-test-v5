@@ -19,4 +19,4 @@ not mine, its the dex explorer v4, but now fixed & added many things from the or
 - Most common shit was removing it by acident
 
 ### Removed Dragging from all the windows
-- Ragging feature of the original one, now removed
+- Raging feature of the original one, now removed
