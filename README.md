@@ -6,8 +6,8 @@ not mine, its the dex explorer v4, but now fixed & added many things from the or
 ### Faster Loading
 Removed some shit visual stuff and dead/bad codes
 
-### More Secure
-Make the explorer 100% indetectable
+### Indetectable
+Uses 3 different types of protection, to make it indetectable
 
 ### View Script
 Right click option, that shows the decompiled selected local script
