@@ -1,12 +1,8 @@
--- Dex Explorer V4(optimized, fixed, new features, removed useless and raging shits)
+-- Dex Explorer V4(fixed & new features)
 -- ^^ link: https://github.com/loglizzy/dexV4
 
 --[[
-	DEX Main Script
-	
 	Created by: Moon and Courtney
-	
-	RASPBERRY PI IS A SKIDDY SKID AF
 --]]
 
 -- Metas
@@ -19,6 +15,16 @@ local Services = setmetatable({},{
 		end
 	end
 })
+
+Services.StarterGui:SetCore("SendNotification", { 
+    Title = 'Loading instances',
+	Text = 'usually takes 8s',
+	Duration = 0.2,
+	Button1 = 'Screen freeze is normal'
+})
+wait(.5)
+
+local run = Services.RunService.RenderStepped
 local plr = Services.Players.LocalPlayer
 local scrframe
 
@@ -146,8 +152,180 @@ function createDexGui()
 	return DexGui
 end
 
+do
+    function createReqGui()
+        local Frame = Instance.new("Frame",protectedGui())
+        local ScrollingFrame = Instance.new("ScrollingFrame")
+        local UIListLayout = Instance.new("UIListLayout")
+        local TextLabel = Instance.new("TextLabel")
+        
+        Frame.Visible = false
+        Frame.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
+        Frame.BorderSizePixel = 0
+        Frame.Position = UDim2.new(0.285367817, 0, 0.126878127, 0)
+        Frame.Size = UDim2.new(0, 476, 0, 388)
+        Frame.ZIndex = 5
+        
+        local UserInputService = Services.UserInputService
+    
+        local gui = Frame
+        
+        local dragging
+        local dragInput
+        local dragStart
+        local startPos
+        
+        local function update(input)
+        	local delta = input.Position - dragStart
+        	gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+        
+        gui.InputBegan:Connect(function(input)
+        	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        		dragging = true
+        		dragStart = input.Position
+        		startPos = gui.Position
+        		
+        		input.Changed:Connect(function()
+        			if input.UserInputState == Enum.UserInputState.End then
+        				dragging = false
+        			end
+        		end)
+        	end
+        end)
+        
+        gui.InputChanged:Connect(function(input)
+        	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        		dragInput = input
+        	end
+        end)
+        
+        UserInputService.InputChanged:Connect(function(input)
+        	if input == dragInput and dragging then
+        		update(input)
+        	end
+        end)
+        
+        ScrollingFrame.Parent = Frame
+        ScrollingFrame.Active = true
+        ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        ScrollingFrame.BackgroundTransparency = 1.000
+        ScrollingFrame.BorderSizePixel = 0
+        ScrollingFrame.Position = UDim2.new(0, 9,0, 7)
+        ScrollingFrame.Size = UDim2.new(0, 458, 0, 321)
+        ScrollingFrame.ScrollBarThickness = 4
+        
+        UIListLayout.Parent = ScrollingFrame
+        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        
+        TextLabel.Parent = ScrollingFrame
+        TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TextLabel.BackgroundTransparency = 1.000
+        TextLabel.Size = UDim2.new(0, 446, 0, 322)
+        TextLabel.Font = Enum.Font.Gotham
+        TextLabel.TextColor3 = Color3.fromRGB(218, 218, 218)
+        TextLabel.TextSize = 14.000
+        TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+        TextLabel.TextYAlignment = Enum.TextYAlignment.Top
+        TextLabel.RichText = true
+        
+        local TextButton = Instance.new("TextButton")
+        local UICorner = Instance.new("UICorner")
+        local TextButton_2 = Instance.new("TextButton")
+        local UICorner_2 = Instance.new("UICorner")
+        
+        TextButton.Parent = Frame
+        TextButton.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+        TextButton.BorderSizePixel = 0
+        TextButton.Position = UDim2.new(0.787815154, 0, 0.865825772, 0)
+        TextButton.Size = UDim2.new(0, 92, 0, 43)
+        TextButton.Font = Enum.Font.Gotham
+        TextButton.Text = "Close"
+        TextButton.TextColor3 = Color3.fromRGB(230, 230, 230)
+        TextButton.TextSize = 14.000
+        TextButton.MouseButton1Click:Connect(function()
+            Frame.Visible = false
+        end)
+        
+        UICorner.CornerRadius = UDim.new(0, 4)
+        UICorner.Parent = TextButton
+        
+        TextButton_2.Parent = Frame
+        TextButton_2.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+        TextButton_2.BorderSizePixel = 0
+        TextButton_2.Position = UDim2.new(0.579831958, 0, 0.865825772, 0)
+        TextButton_2.Size = UDim2.new(0, 92, 0, 43)
+        TextButton_2.Font = Enum.Font.Gotham
+        TextButton_2.Text = "Copy"
+        TextButton_2.TextColor3 = Color3.fromRGB(230, 230, 230)
+        TextButton_2.TextSize = 14.000
+        TextButton_2.MouseButton1Click:Connect(function()
+            if not crrObj then wait(.1) end
+            if crrObj then setclipboard('require(game.'..crrObj:GetFullName()..')') end
+        end)
+        
+        UICorner_2.CornerRadius = UDim.new(0, 4)
+        UICorner_2.Parent = TextButton_2
+        
+        local TextLabel_2 = Instance.new("TextLabel")
+        
+        TextLabel_2.Parent = Frame
+        TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TextLabel_2.BackgroundTransparency = 1.000
+        TextLabel_2.Position = UDim2.new(0.0315126069, 0, 0.914329906, 0)
+        TextLabel_2.Size = UDim2.new(0, 201, 0, 31)
+        TextLabel_2.Font = Enum.Font.Gotham
+        TextLabel_2.TextColor3 = Color3.fromRGB(218, 218, 218)
+        TextLabel_2.TextSize = 12.000
+        TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+        TextLabel_2.RichText = true
+    
+        local function st(e,adcti)
+            if type(e) ~= 'table' then e = {e} end
+            local tl,sp = '{\n',adcti
+            
+            local function lp(e)
+                for i,v in pairs(e) do
+                    local t = type(v)
+                    if t == 'table' then
+                        tl = tl..(sp..' <font size="15">'..i..'</font>  {')..'\n\n'
+                        sp = sp..adcti
+                        lp(v)
+                        sp = sp:sub(0,#sp-(#adcti))
+                        tl = tl..'\n'
+                    elseif t=='number' or t=='string' then
+                        if type(i) == 'number' then
+                            tl = tl..(sp..' <b>[<font color="rgb(170,170,170)">'..i..'</font>]</b> = <font color="rgb(170,170,170)">'..v..'</font>'    )..'\n'
+                        end
+                    end
+                end
+            end
+            lp(e)
+            return tl..'}'
+        end
+        
+        function showRequired(obj)
+            Frame.Visible = false
+            TextLabel_2.Text = 'Module: <font color="rgb(170,170,170)">'..obj.Name..'</font>'
+            TextLabel.RichText = false
+            TextLabel.Text = st(require(obj),'     ')
+            TextLabel.Size = UDim2.new(0,446,0,TextLabel.TextBounds.Y)
+            ScrollingFrame.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y)
+            crrObj = obj
+            TextLabel.RichText = true
+            Frame.Visible = true
+        end
+        return showRequired
+    end
+end
+
 -- Main Gui References
 local gui = createDexGui()
+for i,v in pairs(gui:GetChildren()) do
+    pcall(function()
+        v.ZIndex = 4
+    end)
+end
 if not gui.Parent then gui.Parent = Services.CoreGui end
 local contentL = gui:WaitForChild("ContentFrameL")
 local contentR = gui:WaitForChild("ContentFrameR")
@@ -807,6 +985,7 @@ local ContextMenu do
 		},{})
 		
 		local mainFrame = newMt.Frame
+		mainFrame.ZIndex = 5
 		local entryFrame = contextEntry:Clone()
 		local dividerFrame = contextDivider:Clone()
 		
@@ -1785,6 +1964,7 @@ function f.rightClick(obj)
 	    rightClickContext:AddDivider()
 	elseif decompile and obj:IsA('ModuleScript') then
 	    rightClickContext:Add({Name = "Require Script", Icon = "", DisabledIcon = "",Shortcut = "Shift+E", Disabled = false, OnClick = function()
+	        createReqGui().showRequired(obj)
 	        rightClickContext:Hide()
 	    end})
 	
@@ -2252,32 +2432,6 @@ function f.addObject(obj,noupdate,recurse)
 				f.addObject(v,true)
 			end
 		end
-		
-		if not noupdate then
-			if explorerTree.SearchChecks and explorerTree.SearchResults then
-				for i,v in pairs(explorerTree.SearchChecks) do
-					local success,found = pcall(v,obj)
-					if found then
-						explorerTree.SearchResults[obj] = true
-						explorerTree.SearchExpanded[obj] = math.max(explorerTree.SearchExpanded[v] or 0, 1)
-						local par = obj.Parent
-						while par and not explorerTree.SearchResults[par] or explorerTree.SearchExpanded[par] == 1 do
-							explorerTree.SearchResults[par] = true
-							explorerTree.SearchExpanded[par] = 2
-							par = par.Parent
-						end
-					end
-				end
-			end
-			
-			if not updateDebounce then
-				updateDebounce = true
-				wait()
-				updateDebounce = false
-				explorerTree:TreeUpdate()
-				f.refreshExplorer()
-			end
-		end
 	end)
 end
 
@@ -2336,16 +2490,9 @@ function f.indexNodes(obj)
 	local addObject = f.addObject
 	local removeObject = f.removeObject
     
-    local amt,tbl = 0,game:GetChildren()
-	for i,v in pairs(tbl) do
-	    spawn(function()
-	        pcall(function()
-		        addObject(v,true,true)
-		    end)
-		    amt = amt + 1
-		end)
+	for i,v in pairs(game:GetChildren()) do
+		addObject(v,true,true)
 	end
-	repeat wait() until amt == #tbl
 end
 
 function f.gExpanded(obj)
