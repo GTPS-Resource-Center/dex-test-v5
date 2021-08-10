@@ -1,23 +1,14 @@
-# dexV4
+# DexV4
 not mine, its the dex explorer v4, but now fixed & improved
 
 ## Features
 
-### Faster Loading
-Threading loading and optimization making it faster
+* Faster Loading `thread loading`
+* Indetectable `100% indetectable`
+* Copy Path `copies the selected instance path`
+* Copy Script Source `copies the selected script source`
+* Require Module `shows the require(module) response`
 
-### Indetectable
-Uses 3 different types of protection, to make it 100% indetectable
-
-### Copy Path
-Right click option, that copies the selected object path
-
-### View Script
-Right click option, that shows the selected local script source
-
-### Require Module
-Right click option, that shows the `require(module)` response
-
-## Aditional changes (only raging things)
+## Aditional changes (raging shit)
 * Removed Properties window close button
 * Removed Dragging from all the windows
