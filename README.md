@@ -1,5 +1,5 @@
 # DexV4
-not mine, its the dex explorer v4, but now fixed & improved
+not mine, its the dex explorer v4, but with some improvements
 
 ## Features
 
