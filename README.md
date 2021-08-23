@@ -1,5 +1,6 @@
 # DexV4
 not mine, its the dex explorer v4, but with some improvements
+* dex v4,v3 were really badly made, and then im making my own explorer, i dont spend such time on it then it should take a time to complete.
 
 ## Features
 
