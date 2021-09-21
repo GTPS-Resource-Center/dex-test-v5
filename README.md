@@ -1,6 +1,6 @@
 # DexV4
 not mine, its the dex explorer v4, but with some improvements
-* dex v4,v3 were really badly made(almost 100 mb of ram usage lol)
+![image](https://user-images.githubusercontent.com/72479668/134221104-95ef1ac5-4b10-4d90-82d6-0b41cc151885.png)
 
 ## Features
 
