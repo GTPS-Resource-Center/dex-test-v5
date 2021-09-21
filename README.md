@@ -5,7 +5,7 @@ not mine, its the dex explorer v4, but with some improvements
 ## Features
 
 * Faster Loading `thread loading`
-* Indetectable `100% indetectable`
+* Almost Indetectable `uses protect_gui, getconnections, random instances, hided in roblox gui`
 * Copy Path `copies the selected instance path`
 * View Script `allows you to see the selected script source code`
 * Copy Script Source `copies the selected script source`
