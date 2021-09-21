@@ -1,9 +1,3 @@
---[[
-	please use the original github repo, as it still gonna have more improvements
-	Created by: Moon and Courtney
---]]
-
--- Metas
 local Services = setmetatable({},{
 	__index = function(self, ind)
 		if ypcall(function()game:GetService(ind)end) then
@@ -16,7 +10,7 @@ local Services = setmetatable({},{
 
 Services.StarterGui:SetCore("SendNotification", { 
     Title = 'Loading instances',
-	Text = 'usually takes 8s',
+	Text = 'usually takes 4s',
 	Duration = 0.2,
 	Button1 = 'Screen freeze is normal'
 })
@@ -36,7 +30,7 @@ end
 
 local function protectedGui()
     local DexGui = Services.CoreGui:FindFirstChildOfClass('ScreenGui') or CreateInstance("ScreenGui",{DisplayOrder=0,Enabled=true,ResetOnSpawn=true})
-	if syn.protect_gui or protect_gui then (syn.protect_gui or protect_gui)(DexGui) else
+	if syn and syn.protect_gui or protect_gui then (syn.protect_gui or protect_gui)(DexGui) else
 	    if getconnections then
 	        local function cleancons(v)
 	            for i,v in pairs(getconnections(v)) do
@@ -50,6 +44,532 @@ local function protectedGui()
 	    end
 	end
 	return DexGui
+end
+
+do
+    function showCode(i,nm)
+        local Frame = Instance.new("Frame")
+        local top = Instance.new("Frame")
+        local name = Instance.new("TextLabel")
+        local clear = Instance.new("ImageButton")
+        local list = Instance.new("ScrollingFrame")
+        local lay = Instance.new("UIListLayout")
+        local sp = Instance.new("Frame")
+        local num = Instance.new("TextLabel")
+        local cod = Instance.new("TextLabel")
+        local Globals_ = Instance.new("TextLabel")
+        local Keywords_ = Instance.new("TextLabel")
+        local Numbers_ = Instance.new("TextLabel")
+        local RemoteHighlight_ = Instance.new("TextLabel")
+        local Strings_ = Instance.new("TextLabel")
+        local Tokens_ = Instance.new("TextLabel")
+        local Comments_ = Instance.new("TextLabel")
+        local ResizeBtn = Instance.new("ImageButton")
+        
+        local did = (shared.did or 0) + 1
+        shared.did = did
+        
+        Frame.Parent = protectedGui()
+        Frame.BackgroundColor3 = Color3.fromRGB(42, 44, 49)
+        Frame.BorderSizePixel = 0
+        Frame.Position = UDim2.new(0.1, did*100, 0.01, did*80)
+        Frame.Size = UDim2.new(0, 510, 0, 427)
+        Frame.Visible = false
+        
+        top.Name = "top"
+        top.Parent = Frame
+        top.BackgroundColor3 = Color3.fromRGB(62, 65, 72)
+        top.BorderSizePixel = 0
+        top.Size = UDim2.new(1, 0, 0, 29)
+        
+        name.Name = "name"
+        name.Parent = top
+        name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        name.BackgroundTransparency = 1.000
+        name.Position = UDim2.new(0.021568628, 0, 0, 0)
+        name.Size = UDim2.new(0, 189, 0, 29)
+        name.Font = Enum.Font.Code
+        name.Text = "LocalScript"
+        name.TextColor3 = Color3.fromRGB(227, 227, 227)
+        name.TextSize = 14.000
+        name.TextXAlignment = Enum.TextXAlignment.Left
+        
+        clear.Name = "clear"
+        clear.Parent = top
+        clear.BackgroundTransparency = 1.000
+        clear.Position = UDim2.new(1, -25, 0, 5)
+        clear.Size = UDim2.new(0, 20, 0, 20)
+        clear.ZIndex = 2
+        clear.Image = "rbxassetid://3926305904"
+        clear.ImageColor3 = Color3.fromRGB(239, 239, 239)
+        clear.ImageRectOffset = Vector2.new(924, 724)
+        clear.ImageRectSize = Vector2.new(36, 36)
+        clear.MouseButton1Click:connect(function()
+            Frame.Visible = not Frame.Visible
+            shared.did = did-1
+        end)
+        
+        list.Name = "list"
+        list.Parent = Frame
+        list.Active = true
+        list.BackgroundColor3 = Color3.fromRGB(42, 44, 49)
+        list.BorderSizePixel = 0
+        list.Position = UDim2.new(0, 4, 0, 33)
+        list.Size = UDim2.new(1, -8, 1, -36)
+        list.ScrollBarThickness = 4
+        list.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
+        
+        lay.Name = "lay"
+        lay.Parent = list
+        lay.SortOrder = Enum.SortOrder.LayoutOrder
+        
+        sp.Name = "sp"
+        sp.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        sp.BackgroundTransparency = 1.000
+        sp.BorderSizePixel = 0
+        sp.Size = UDim2.new(0, 492, 0, 20)
+        
+        num.Name = "num"
+        num.Parent = sp
+        num.BackgroundColor3 = Color3.fromRGB(53, 54, 61)
+        num.BorderSizePixel = 0
+        num.Size = UDim2.new(0, 30, 0, 20)
+        num.Font = Enum.Font.Code
+        num.Text = "1"
+        num.TextColor3 = Color3.fromRGB(226, 226, 226)
+        num.TextSize = 16.000
+        num.TextStrokeColor3 = Color3.fromRGB(226, 226, 226)
+        
+        cod.Name = "cod"
+        cod.Parent = sp
+        cod.BackgroundColor3 = Color3.fromRGB(53, 54, 61)
+        cod.BackgroundTransparency = 1.000
+        cod.BorderSizePixel = 0
+        cod.Position = UDim2.new(0, 30, 0, 0)
+        cod.Size = UDim2.new(0, 464, 0, 20)
+        cod.Font = Enum.Font.Code
+        cod.Text = ""
+        cod.TextColor3 = Color3.fromRGB(203, 203, 203)
+        cod.TextSize = 16.000
+        cod.TextStrokeColor3 = Color3.fromRGB(226, 226, 226)
+        cod.TextXAlignment = Enum.TextXAlignment.Left
+        
+        Globals_.Name = "Globals_"
+        Globals_.Parent = cod
+        Globals_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Globals_.BackgroundTransparency = 1.000
+        Globals_.Size = UDim2.new(1, 0, 1, 0)
+        Globals_.ZIndex = 5
+        Globals_.Font = Enum.Font.Code
+        Globals_.Text = ""
+        Globals_.TextColor3 = Color3.fromRGB(102, 153, 204)
+        Globals_.TextSize = 16.000
+        Globals_.TextXAlignment = Enum.TextXAlignment.Left
+        
+        Keywords_.Name = "Keywords_"
+        Keywords_.Parent = cod
+        Keywords_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Keywords_.BackgroundTransparency = 1.000
+        Keywords_.Size = UDim2.new(1, 0, 1, 0)
+        Keywords_.ZIndex = 5
+        Keywords_.Font = Enum.Font.Code
+        Keywords_.Text = ""
+        Keywords_.TextColor3 = Color3.fromRGB(204, 153, 204)
+        Keywords_.TextSize = 16.000
+        Keywords_.TextXAlignment = Enum.TextXAlignment.Left
+        
+        Numbers_.Name = "Numbers_"
+        Numbers_.Parent = cod
+        Numbers_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Numbers_.BackgroundTransparency = 1.000
+        Numbers_.Size = UDim2.new(1, 0, 1, 0)
+        Numbers_.ZIndex = 4
+        Numbers_.Font = Enum.Font.Code
+        Numbers_.Text = ""
+        Numbers_.TextColor3 = Color3.fromRGB(210, 210, 210)
+        Numbers_.TextSize = 16.000
+        Numbers_.TextXAlignment = Enum.TextXAlignment.Left
+        
+        RemoteHighlight_.Name = "RemoteHighlight_"
+        RemoteHighlight_.Parent = cod
+        RemoteHighlight_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        RemoteHighlight_.BackgroundTransparency = 1.000
+        RemoteHighlight_.Size = UDim2.new(1, 0, 1, 0)
+        RemoteHighlight_.ZIndex = 5
+        RemoteHighlight_.Font = Enum.Font.Code
+        RemoteHighlight_.Text = ""
+        RemoteHighlight_.TextColor3 = Color3.fromRGB(0, 144, 255)
+        RemoteHighlight_.TextSize = 16.000
+        RemoteHighlight_.TextXAlignment = Enum.TextXAlignment.Left
+        
+        Strings_.Name = "Strings_"
+        Strings_.Parent = cod
+        Strings_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Strings_.BackgroundTransparency = 1.000
+        Strings_.Size = UDim2.new(1, 0, 1, 0)
+        Strings_.ZIndex = 5
+        Strings_.Font = Enum.Font.Code
+        Strings_.Text = ""
+        Strings_.TextColor3 = Color3.fromRGB(153, 204, 153)
+        Strings_.TextSize = 16.000
+        Strings_.TextXAlignment = Enum.TextXAlignment.Left
+        
+        Tokens_.Name = "Tokens_"
+        Tokens_.Parent = cod
+        Tokens_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Tokens_.BackgroundTransparency = 1.000
+        Tokens_.Size = UDim2.new(1, 0, 1, 0)
+        Tokens_.ZIndex = 5
+        Tokens_.Font = Enum.Font.Code
+        Tokens_.Text = ""
+        Tokens_.TextColor3 = Color3.fromRGB(102, 204, 204)
+        Tokens_.TextSize = 16.000
+        Tokens_.TextXAlignment = Enum.TextXAlignment.Left
+        
+        Comments_.Name = "Comments_"
+        Comments_.Parent = cod
+        Comments_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Comments_.BackgroundTransparency = 1.000
+        Comments_.Size = UDim2.new(1, 0, 1, 0)
+        Comments_.ZIndex = 5
+        Comments_.Font = Enum.Font.Code
+        Comments_.Text = ""
+        Comments_.TextColor3 = Color3.fromRGB(59, 200, 59)
+        Comments_.TextSize = 16.000
+        Comments_.TextXAlignment = Enum.TextXAlignment.Left
+        
+        ResizeBtn.Name = "ResizeBtn"
+        ResizeBtn.Parent = Frame
+        ResizeBtn.BackgroundTransparency = 1.000
+        ResizeBtn.Position = UDim2.new(1, -25, 1, -25)
+        ResizeBtn.Rotation = -35.000
+        ResizeBtn.Size = UDim2.new(0, 25, 0, 25)
+        ResizeBtn.ZIndex = 2
+        ResizeBtn.Image = "rbxassetid://3926305904"
+        ResizeBtn.ImageRectOffset = Vector2.new(564, 284)
+        ResizeBtn.ImageRectSize = Vector2.new(36, 36)
+        
+        local a = Frame
+        local b = sp
+        local c = list
+        local d = lay
+        local w = game:GetService('TextService')
+        local e = {
+        	["local"] = "204,153,204",
+        	["return"] = "204,153,204",
+        	["if"] = "204,153,204",
+        	["elseif"] = "204,153,204",
+        	["then"] = "204,153,204",
+        	["function"] = "204,153,204",
+        	["end"] = "204,153,204",
+        	["or"] = "204,153,204",
+        	["and"] = "204,153,204",
+        	["self"] = "242,119,122",
+        	["="] = "102,204,204",
+        	['"'] = "146,194,146"
+        }
+        local function f(g, v)
+        	local h = b:Clone()
+        	h.num.Text = g
+        	h.cod.Text = ' '..v
+        	h.Size = UDim2.new(0, #v*9, 0, 20)
+        	h.Parent = c
+        	return h
+        end
+    
+        name.Text = 'Decompiling...'
+        Frame.Visible = true
+        i = decompile(i)
+        local j = {"and","break","do","else","elseif","end","false","for","function","goto","if","in","local","nil","not","or","repeat","return","then","true","until","while"}
+        local k = {"getrawmetatable","game","workspace","script","math","string","table","print","wait","BrickColor","Color3","next","pairs","ipairs","select","unpack","Instance","Vector2","Vector3","CFrame","Ray","UDim2","Enum","assert","error","warn","tick","loadstring","_G","shared","getfenv","setfenv","newproxy","setmetatable","getmetatable","os","debug","pcall","ypcall","xpcall","rawequal","rawset","rawget","tonumber","tostring","type","typeof","_VERSION","coroutine","delay","require","spawn","LoadLibrary","settings","stats","time","UserSettings","version","Axes","ColorSequence","Faces","ColorSequenceKeypoint","NumberRange","NumberSequence","NumberSequenceKeypoint","gcinfo","elapsedTime","collectgarbage","PhysicalProperties","Rect","Region3","Region3int16","UDim","Vector2int16","Vector3int16"}
+        local l = function(m, n)
+        	local o = {}
+        	local p = m
+        	local q = {
+        		["="] = true,
+        		["."] = true,
+        		[","] = true,
+        		["("] = true,
+        		[")"] = true,
+        		["["] = true,
+        		["]"] = true,
+        		["{"] = true,
+        		["}"] = true,
+        		[":"] = true,
+        		["*"] = true,
+        		["/"] = true,
+        		["+"] = true,
+        		["-"] = true,
+        		["%"] = true,
+        		[";"] = true,
+        		["~"] = true
+        	}
+        	for g, v in pairs(n) do
+        		o[v] = true
+        	end
+        	p =
+        		p:gsub(
+        			".",
+        			function(h)
+        			if q[h] ~= nil then
+        				return "\32"
+        			else
+        				return h
+        			end
+        		end
+        		)
+        	p =
+        		p:gsub(
+        			"%S+",
+        			function(h)
+        			if o[h] ~= nil then
+        				return h
+        			else
+        				return (" "):rep(#h)
+        			end
+        		end
+        		)
+        	return p
+        end
+        local r = function(m)
+        	local q = {
+        		["="] = true,
+        		["."] = true,
+        		[","] = true,
+        		["("] = true,
+        		[")"] = true,
+        		["["] = true,
+        		["]"] = true,
+        		["{"] = true,
+        		["}"] = true,
+        		[":"] = true,
+        		["*"] = true,
+        		["/"] = true,
+        		["+"] = true,
+        		["-"] = true,
+        		["%"] = true,
+        		[";"] = true,
+        		["~"] = true
+        	}
+        	local s = ""
+        	m:gsub(
+        		".",
+        		function(h)
+        			if q[h] ~= nil then
+        				s = s .. h
+        			elseif h == "\n" then
+        				s = s .. "\n"
+        			elseif h == "\t" then
+        				s = s .. "\t"
+        			else
+        				s = s .. "\32"
+        			end
+        		end
+        	)
+        	return s
+        end
+        local t = function(m)
+        	local u = ""
+        	local w = false
+        	m:gsub(
+        		".",
+        		function(h)
+        			if w == false and h == '"' then
+        				w = true
+        			elseif w == true and h == '"' then
+        				w = false
+        			end
+        			if w == false and h == '"' then
+        				u = u .. '"'
+        			elseif h == "\n" then
+        				u = u .. "\n"
+        			elseif h == "\t" then
+        				u = u .. "\t"
+        			elseif w == true then
+        				u = u .. h
+        			elseif w == false then
+        				u = u .. "\32"
+        			end
+        		end
+        	)
+        	return u
+        end
+        local x = function(m)
+        	local y = ""
+        	m:gsub(
+        		"[^\r\n]+",
+        		function(h)
+        			local z = false
+        			local g = 0
+        			h:gsub(
+        				".",
+        				function(A)
+        					g = g + 1
+        					if h:sub(g, g + 1) == "--" then
+        						z = true
+        					end
+        					if z == true then
+        						y = y .. A
+        					else
+        						y = y .. "\32"
+        					end
+        				end
+        			)
+        			y = y
+        		end
+        	)
+        	return y
+        end
+        local B = function(m)
+        	local s = ""
+        	m:gsub(
+        		".",
+        		function(h)
+        			if tonumber(h) ~= nil then
+        				s = s .. h
+        			elseif h == "\n" then
+        				s = s .. "\n"
+        			elseif h == "\t" then
+        				s = s .. "\t"
+        			else
+        				s = s .. "\32"
+        			end
+        		end
+        	)
+        	return s
+        end
+        local C = function(D, E)
+        	if D == "Text" then
+        		E.Text = ' '..E.Text:gsub("\13", ""):gsub("\t", "      ")
+        		local F = E.Text
+        		E.Keywords_.Text = l(F, j)
+        		E.Globals_.Text = l(F, k)
+        		E.RemoteHighlight_.Text = l(F, {"FireServer", "fireServer", "InvokeServer", "invokeServer"})
+        		E.Tokens_.Text = r(F)
+        		E.Numbers_.Text = B(F)
+        		E.Strings_.Text = t(F)
+        	end
+        end
+        for g, v in pairs(i:split("\n")) do
+        	C("Text", f(g, v).cod)
+        	
+        	v = d.AbsoluteContentSize
+            c.CanvasSize = UDim2.new(0, v.X, 0, v.Y)
+        end
+        name.Text = nm
+    	
+        local b = ResizeBtn
+        local mouse = game.Players.LocalPlayer:GetMouse()
+        local Pressing = false
+        
+        local RecordedLastX = nil
+        local RecordedLastY = nil
+        
+        local NowPositionX = nil
+        local NowPositionY = nil
+        
+        local Hovered = false
+        
+        b.InputBegan:connect(function(key)
+        	if key.UserInputType == Enum.UserInputType.MouseButton1 then
+        		Pressing = true
+        		RecordedLastX = mouse.X
+        		RecordedLastY = mouse.Y
+        		b.InputEnded:connect(function(key2)
+        			if key == key2 then
+        				Pressing =  false
+        			end
+        		end)
+        	end
+        end)
+        
+        b.MouseEnter:connect(function()
+        	crr = true
+        	Hovered = true
+        	b.MouseLeave:connect(function()
+        		RecordedLastX = mouse.X
+        		RecordedLastY = mouse.Y
+        		wait(.3)
+        		if crr then crr = false return end
+        		Hovered = false
+        	end)
+        end)
+        
+        mouse.Move:connect(function()
+        	if Pressing and Hovered then
+        		NowPositionX = mouse.x
+        		NowPositionY = mouse.y
+        	
+        		local ChangeX = NowPositionX - RecordedLastX
+        		local ChangeY = NowPositionY - RecordedLastY
+        		
+        		RecordedLastX = mouse.X
+        		RecordedLastY = mouse.Y
+        	
+        		Frame.Size = UDim2.new(0, Frame.Size.X.Offset + ChangeX, 0, Frame.Size.Y.Offset + ChangeY)
+        	end
+        end)
+        	
+        local Object = Frame
+        local Min = Object.Size.X.Offset*0.6
+        local Max = Min*2.6
+        
+        Object.Changed:connect(function()
+        	if Object.Size.X.Offset < Min and Object.Size.Y.Offset < Min then
+        		Object.Size = UDim2.new(0, Min, 0, Min)
+        	elseif Object.Size.X.Offset < Min then
+        		Object.Size = UDim2.new(0, Min, 0, Object.Size.Y.Offset)
+        	elseif Object.Size.Y.Offset < Min then
+        		Object.Size = UDim2.new(0, Object.Size.X.Offset, 0, Min)
+        	end
+        	if Object.Size.X.Offset > Max and Object.Size.Y.Offset > Max then
+        		Object.Size = UDim2.new(0, Max, 0, Max)
+        	elseif Object.Size.X.Offset > Max then
+        		Object.Size = UDim2.new(0, Max, 0, Object.Size.Y.Offset)
+        	elseif Object.Size.Y.Offset > Max then
+        		Object.Size = UDim2.new(0, Object.Size.X.Offset, 0, Max)
+        	end
+        end)
+        
+        local UserInputService = Services.UserInputService      
+        local gui = Frame
+        
+        local dragging
+        local dragInput
+        local dragStart
+        local startPos
+        
+        local function update(input)
+        	local delta = input.Position - dragStart
+        	gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+        
+        gui.InputBegan:Connect(function(input)
+        	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        		dragging = true
+        		dragStart = input.Position
+        		startPos = gui.Position
+        		
+        		input.Changed:Connect(function()
+        			if input.UserInputState == Enum.UserInputState.End then
+        				dragging = false
+        			end
+        		end)
+        	end
+        end)
+        
+        gui.InputChanged:Connect(function(input)
+        	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        		dragInput = input
+        	end
+        end)
+        
+        UserInputService.InputChanged:Connect(function(input)
+        	if input == dragInput and dragging then
+        		update(input)
+        	end
+        end)
+    end
 end
 
 function createDexGui()
@@ -294,7 +814,7 @@ do
                         if type(i) == 'number' then
                             tl = tl..(sp..' <b>[<font color="rgb(170,170,170)">'..i..'</font>]</b> = <font color="rgb(170,170,170)">'..v..'</font>'    )..'\n'
                         elseif t == 'string' then
-                            tl = tl..(sp..' <b>'..i..'</b> = <font color="rgb(170,170,170)">'..v..'</font>'    )..'\n'
+                            tl = tl..(sp..' <b>'..i..'</b> = "<font color="rgb(170,170,170)">'..v..'</font>"'    )..'\n'
                         end
                     end
                 end
@@ -960,7 +1480,7 @@ local ContextMenu do
 		local ContextEntry2 = CreateInstance("Frame",{Style=0,Active=false,AnchorPoint=Vector2.new(0,0),BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,BorderColor3=Color3.new(0.10588236153126,0.16470588743687,0.20784315466881),BorderSizePixel=1,ClipsDescendants=true,Draggable=false,Position=UDim2.new(0,2,0.5,-8),Rotation=0,Selectable=false,Size=UDim2.new(0,16,0,16),SizeConstraint=0,Visible=true,ZIndex=1,Name="IconFrame",Parent = ContextEntry})
 		local ContextEntry3 = CreateInstance("ImageLabel",{Image="rbxassetid://529659138",ImageColor3=Color3.new(1,1,1),ImageRectOffset=Vector2.new(0,0),ImageRectSize=Vector2.new(0,0),ImageTransparency=0,ScaleType=0,SliceCenter=Rect.new(0,0,0,0),Active=false,AnchorPoint=Vector2.new(0,0),BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,BorderColor3=Color3.new(0.10588236153126,0.16470588743687,0.20784315466881),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0,0,0,0),Rotation=0,Selectable=false,Size=UDim2.new(0,16,0,16),SizeConstraint=0,Visible=true,ZIndex=1,Name="Icon",Parent = ContextEntry2})
 		local ContextEntry4 = CreateInstance("TextLabel",{Font=3,FontSize=5,Text="Item",TextColor3=Color3.new(0.86274516582489,0.86274516582489,0.86274516582489),TextScaled=false,TextSize=14,TextStrokeColor3=Color3.new(0,0,0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=0,TextYAlignment=1,Active=false,AnchorPoint=Vector2.new(0,0),BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,BorderColor3=Color3.new(0.10588236153126,0.16470588743687,0.20784315466881),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0,24,0,0),Rotation=0,Selectable=false,Size=UDim2.new(1,-24,0,20),SizeConstraint=0,Visible=true,ZIndex=1,Name="EntryName",Parent = ContextEntry})
-		local ContextEntry5 = CreateInstance("TextLabel",{Font=3,FontSize=5,Text="Shift+C",TextColor3=Color3.new(0.86274516582489,0.86274516582489,0.86274516582489),TextScaled=false,TextSize=14,TextStrokeColor3=Color3.new(0,0,0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=1,TextYAlignment=1,Active=false,AnchorPoint=Vector2.new(0,0),BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,BorderColor3=Color3.new(0.10588236153126,0.16470588743687,0.20784315466881),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0,24,0,0),Rotation=0,Selectable=false,Size=UDim2.new(1,-30,0,20),SizeConstraint=0,Visible=true,ZIndex=1,Name="Shortcut",Parent = ContextEntry})
+		local ContextEntry5 = CreateInstance("TextLabel",{Font=3,FontSize=5,Text="Ctrl+C",TextColor3=Color3.new(0.86274516582489,0.86274516582489,0.86274516582489),TextScaled=false,TextSize=14,TextStrokeColor3=Color3.new(0,0,0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=false,TextXAlignment=1,TextYAlignment=1,Active=false,AnchorPoint=Vector2.new(0,0),BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,BorderColor3=Color3.new(0.10588236153126,0.16470588743687,0.20784315466881),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0,24,0,0),Rotation=0,Selectable=false,Size=UDim2.new(1,-30,0,20),SizeConstraint=0,Visible=true,ZIndex=1,Name="Shortcut",Parent = ContextEntry})
 		return ContextEntry
 	end
 	
@@ -1952,26 +2472,38 @@ function f.rightClick(obj)
 	
 	-- Cut
 	
-	if decompile and obj:IsA('LocalScript') then
-	    rightClickContext:Add({Name = "Copy Script Source", Icon = "", DisabledIcon = "",Shortcut = "Shift+E", Disabled = false, OnClick = function()
-	        spawn(function()setclipboard(decompile(obj))end)
-	        
-	        rightClickContext:Hide()
-	    end})
-	    
-	    rightClickContext:AddDivider()
-	elseif obj:IsA('ModuleScript') then
-	    rightClickContext:Add({Name = "Require Module", Icon = "", DisabledIcon = "",Shortcut = "Shift+E", Disabled = false, OnClick = function()
+	if obj:IsA('ModuleScript') then
+	    rightClickContext:Add({Name = "Require Module", Icon = "", DisabledIcon = "",Shortcut = "Ctrl+E", Disabled = false, OnClick = function()
 	        print(pcall(function()
 	            createReqGui()(obj)
 	        end))
 	        rightClickContext:Hide()
 	    end})
+	    if decompile then
+	        rightClickContext:Add({Name = "View Script", Icon = "", DisabledIcon = "",Shortcut = "Ctrl+E", Disabled = false, OnClick = function()
+	            spawn(function()print(pcall(showCode,obj,obj.Name))end)
+	            
+	            rightClickContext:Hide()
+	        end})
+	    end
+	elseif decompile and obj:IsA('LocalScript') then
+	    rightClickContext:Add({Name = "View Script", Icon = "", DisabledIcon = "",Shortcut = "Ctrl+E", Disabled = false, OnClick = function()
+	        spawn(function()print(pcall(showCode,obj,obj.Name))end)
+	        
+	        rightClickContext:Hide()
+	    end})
 	
+	    rightClickContext:Add({Name = "Copy Script Source", Icon = "", DisabledIcon = "",Shortcut = "Ctrl+E", Disabled = false, OnClick = function()
+	        spawn(function()setclipboard(decompile(obj))end)
+	        
+	        rightClickContext:Hide()
+	    end})
+	end
+	if obj:IsA('ModuleScript') or obj:IsA('LocalScript') then
 	    rightClickContext:AddDivider()
 	end
 	
-	rightClickContext:Add({Name = "Cut", Icon = f.icon(nil,iconIndex.CUT_ICON), DisabledIcon = f.icon(nil,iconIndex.CUT_D_ICON), Shortcut = "Shift+X", Disabled = #selection.List == 0, OnClick = function()
+	rightClickContext:Add({Name = "Cut", Icon = f.icon(nil,iconIndex.CUT_ICON), DisabledIcon = f.icon(nil,iconIndex.CUT_D_ICON), Shortcut = "Ctrl+X", Disabled = #selection.List == 0, OnClick = function()
 		pcall(function()
 			clipboard = {}
 			for i,v in pairs(selection.List) do
@@ -1982,7 +2514,7 @@ function f.rightClick(obj)
 		rightClickContext:Hide()
 	end})
 	
-	rightClickContext:Add({Name = "Copy", Icon = f.icon(nil,iconIndex.COPY_ICON), DisabledIcon = f.icon(nil,iconIndex.COPY_D_ICON), Shortcut = "Shift+C", Disabled = #selection.List == 0, OnClick = function()
+	rightClickContext:Add({Name = "Copy", Icon = f.icon(nil,iconIndex.COPY_ICON), DisabledIcon = f.icon(nil,iconIndex.COPY_D_ICON), Shortcut = "Ctrl+C", Disabled = #selection.List == 0, OnClick = function()
 		pcall(function()
 			clipboard = {}
 			for i,v in pairs(selection.List) do
@@ -1992,7 +2524,7 @@ function f.rightClick(obj)
 		rightClickContext:Hide()
 	end})
 	
-	rightClickContext:Add({Name = "Paste Into", Icon = f.icon(nil,iconIndex.PASTE_ICON), DisabledIcon = f.icon(nil,iconIndex.PASTE_D_ICON), Shortcut = "Shift+B", Disabled = #clipboard == 0, OnClick = function()
+	rightClickContext:Add({Name = "Paste Into", Icon = f.icon(nil,iconIndex.PASTE_ICON), DisabledIcon = f.icon(nil,iconIndex.PASTE_D_ICON), Shortcut = "Ctrl+V", Disabled = #clipboard == 0, OnClick = function()
 		pcall(function()
 			for i,v in pairs(selection.List) do
 				for _,copy in pairs(clipboard) do
@@ -2003,7 +2535,7 @@ function f.rightClick(obj)
 		rightClickContext:Hide()
 	end})
 	
-	rightClickContext:Add({Name = "Duplicate", Icon = f.icon(nil,iconIndex.COPY_ICON), DisabledIcon = f.icon(nil,iconIndex.COPY_D_ICON), Shortcut = "Shift+D", Disabled = #selection.List == 0, OnClick = function()
+	rightClickContext:Add({Name = "Duplicate", Icon = f.icon(nil,iconIndex.COPY_ICON), DisabledIcon = f.icon(nil,iconIndex.COPY_D_ICON), Shortcut = "Ctrl+D", Disabled = #selection.List == 0, OnClick = function()
 		pcall(function()
 			for i,v in pairs(selection.List) do
 				v:Clone().Parent = v.Parent
@@ -2022,7 +2554,7 @@ function f.rightClick(obj)
 	end})
 	
 	if setclipboard then
-	rightClickContext:Add({Name = "Copy Path", Icon = "", DisabledIcon = "", Shortcut = "Shift+R", Disabled = #selection.List == 0, OnClick = function()
+	rightClickContext:Add({Name = "Copy Path", Icon = "", DisabledIcon = "", Shortcut = "Ctrl+R", Disabled = #selection.List == 0, OnClick = function()
 	    setclipboard('game.'..string.gsub(obj:GetFullName(),'Players.'..plr.Name,'Players.LocalPlayer'))
 	    rightClickContext:Hide()
 	end})
@@ -2030,7 +2562,7 @@ function f.rightClick(obj)
 	
 	rightClickContext:AddDivider()
 	
-	rightClickContext:Add({Name = "Group", Icon = f.icon(nil,iconIndex.GROUP_ICON), DisabledIcon = f.icon(nil,iconIndex.GROUP_D_ICON), Shortcut = "Shift+G", Disabled = #selection.List == 0, OnClick = function()
+	rightClickContext:Add({Name = "Group", Icon = f.icon(nil,iconIndex.GROUP_ICON), DisabledIcon = f.icon(nil,iconIndex.GROUP_D_ICON), Shortcut = "Ctrl+G", Disabled = #selection.List == 0, OnClick = function()
 		local base = selection.List[1]
 		local model = Instance.new("Model",base.Parent)
 		for i,v in pairs(selection.List) do
@@ -2039,7 +2571,7 @@ function f.rightClick(obj)
 		rightClickContext:Hide()
 	end})
 	
-	rightClickContext:Add({Name = "Ungroup", Icon = f.icon(nil,iconIndex.UNGROUP_ICON), DisabledIcon = f.icon(nil,iconIndex.UNGROUP_D_ICON), Shortcut = "Shift+U", Disabled = not f.tabIsA(selection.List,"Model"), OnClick = function()
+	rightClickContext:Add({Name = "Ungroup", Icon = f.icon(nil,iconIndex.UNGROUP_ICON), DisabledIcon = f.icon(nil,iconIndex.UNGROUP_D_ICON), Shortcut = "Ctrl+U", Disabled = not f.tabIsA(selection.List,"Model"), OnClick = function()
 		for i,v in pairs(selection.List) do
 			if v:IsA("Model") then
 				for _,child in pairs(v:GetChildren()) do
