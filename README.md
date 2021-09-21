@@ -14,3 +14,4 @@ not mine, its the dex explorer v4, but with some improvements
 ## Aditional changes (raging shit)
 * Removed Properties window close button
 * Removed Dragging from all the windows
+* Didn't used the same shit syntax highlight as dex v3 (script viewer)
