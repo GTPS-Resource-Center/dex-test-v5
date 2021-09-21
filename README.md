@@ -7,6 +7,7 @@ not mine, its the dex explorer v4, but with some improvements
 * Faster Loading `thread loading`
 * Indetectable `100% indetectable`
 * Copy Path `copies the selected instance path`
+* View Script `allows you to see the selected script source code`
 * Copy Script Source `copies the selected script source`
 * Require Module `shows the require(module) response`
 
