@@ -452,10 +452,10 @@ do
         end
         for g, v in pairs(i:split("\n")) do
         	C("Text", f(g, v).cod)
-        	
-        	v = d.AbsoluteContentSize
-            c.CanvasSize = UDim2.new(0, v.X, 0, v.Y)
-        end
+	end
+	
+	local v = d.AbsoluteContentSize
+        c.CanvasSize = UDim2.new(0, v.X, 0, v.Y)
         name.Text = nm
     	
         local b = ResizeBtn
