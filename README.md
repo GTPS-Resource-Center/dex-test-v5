@@ -1,6 +1,21 @@
 # DexV4
 not mine, its the dex explorer v4, but with some improvements
 
+# Loader
+```lua
+local file = "dexV4.lua" -- cache file name (workspace folder)
+local url = "https://raw.githubusercontent.com/loglizzy/dexV4/main/source.lua"
+
+local raw = isfile and isfile(file) and readfile(file)
+raw = raw or game:HttpGet(url)
+
+if isfile then
+    task.spawn(writefile, file, game:HttpGet(url))
+end
+
+loadstring(raw)()
+
+```
 ![image](https://user-images.githubusercontent.com/72479668/134221104-95ef1ac5-4b10-4d90-82d6-0b41cc151885.png)
 
 ## Features
