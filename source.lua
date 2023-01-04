@@ -2473,11 +2473,11 @@ function f.rightClick(obj)
 	-- Cut
 	
 	if obj:IsA('ModuleScript') then
-	    rightClickContext:Add({Name = "Require Module", Icon = "", DisabledIcon = "",Shortcut = "Ctrl+E", Disabled = false, OnClick = function()
-	        print(pcall(function()
-	            createReqGui()(obj)
-	        end))
-	        rightClickContext:Hide()
+	    rightClickContext:Add({Name = "View Script", Icon = "", DisabledIcon = "",Shortcut = "Ctrl+E", Disabled = false, OnClick = function()
+	            spawn(function()print(pcall(showCode,obj,obj.Name))end)
+	            
+	            rightClickContext:Hide()
+	        end})
 	    end})
 	    if decompile then
 	        rightClickContext:Add({Name = "View Script", Icon = "", DisabledIcon = "",Shortcut = "Ctrl+E", Disabled = false, OnClick = function()
