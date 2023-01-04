@@ -3,7 +3,7 @@ not mine, its the dex explorer v4, but with some improvements
 
 # Loader
 ```lua
-local file = "dexV4.lua" -- cache file name (workspace folder)
+local file = "dexV5.lua" -- cache file name (workspace folder)
 local url = "https://raw.githubusercontent.com/GTPS-Resource-Center/dex-test-v5/main/source.lua"
 
 local raw = isfile and isfile(file) and readfile(file)
