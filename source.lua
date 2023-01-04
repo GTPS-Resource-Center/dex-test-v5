@@ -2472,7 +2472,7 @@ function f.rightClick(obj)
 	
 	-- Cut
 	
-	if obj:IsA('ModuleScript') then
+	if obj:IsA('ModuleScript') or obj:IsA('LocalScript') then
 	    rightClickContext:Add({Name = "Require Module", Icon = "", DisabledIcon = "",Shortcut = "Ctrl+E", Disabled = false, OnClick = function()
 	        print(pcall(function()
 	            createReqGui()(obj)
